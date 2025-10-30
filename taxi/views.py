@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, TemplateView
 from taxi.models import Driver, Car, Manufacturer
+from django.db.models import Count
 from django.db.models import Prefetch
 
 
@@ -30,14 +31,13 @@ class CarListView(ListView):
 
 class CarDetailView(DetailView):
     model = Car
-    queryset = (Car.objects.select_related("manufacturer").
-                prefetch_related("drivers"))
 
 
 class DriverListView(ListView):
     model = Driver
     queryset = Driver.objects.all().order_by("username")
     paginate_by = 5
+    queryset = Driver.objects.annotate(num_cars=Count("cars"))
 
 
 class DriverDetailView(DetailView):
