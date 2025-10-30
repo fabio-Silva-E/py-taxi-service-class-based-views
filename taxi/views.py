@@ -35,9 +35,10 @@ class CarDetailView(DetailView):
 
 class DriverListView(ListView):
     model = Driver
-    queryset = Driver.objects.all().order_by("username")
+    queryset = Driver.objects.all().order_by("username").\
+        queryset = Driver.objects.annotate(num_cars=Count("cars"))
+
     paginate_by = 5
-    queryset = Driver.objects.annotate(num_cars=Count("cars"))
 
 
 class DriverDetailView(DetailView):

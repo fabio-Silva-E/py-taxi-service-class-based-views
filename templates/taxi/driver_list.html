@@ -16,7 +16,7 @@
         <tr>
           <td><a href="{% url 'taxi:driver-detail' driver.pk %}">{{ driver.username }}</a></td>
           <td>{{ driver.full_name }}</td>
-          <td>{{ driver.cars.count }}</td>
+          <td>{{ driver.num_cars }}</td>
         </tr>
       {% empty %}
         <tr><td colspan="3">Nenhum motorista encontrado.</td></tr>
